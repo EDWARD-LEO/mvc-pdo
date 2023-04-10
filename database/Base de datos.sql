@@ -133,4 +133,31 @@ INSERT INTO usuarios (nombreusuario, claveacceso, apellidos, nombres) VALUES
 	('JHON', '123456', 'Francia Minaya', 'Jhon Edward'),
 	('JOEL', '123456', 'Rojas Marcos', 'José Joel');
 
+
+-- ACTUALIZANDO por clave encriptada
+-- Defecto: SENATI
+UPDATE usuarios SET
+	claveacceso = '$2y$10$u.8fXT9uFZp/zbmsYp/liOVQGUPM9dDC4YxIWImmi6FEMjKl46TEW'
+	WHERE idusuario = 1;
+
+UPDATE usuarios SET
+	claveacceso = '$2y$10$yLb81NJ6k4.s0qP0Vkp8gu2WA2d8qS91NihobWtHV/4LdKZLSlbXW'
+	WHERE idusuario = 2;
+
 SELECT * FROM usuarios;
+
+
+
+DELIMITER $$
+CREATE PROCEDURE spu_usuarios_login(IN _nombreusuario VARCHAR(30))
+BEGIN
+	SELECT	idusuario, nombreusuario, claveacceso,
+				apellidos, nombres, nivelacceso
+		FROM usuarios 
+		WHERE nombreusuario = _nombreusuario AND estado = '1';
+END $$
+
+CALL spu_usuarios_login('PATY');
+
+
+
