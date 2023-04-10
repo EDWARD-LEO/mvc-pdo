@@ -157,7 +157,7 @@ BEGIN
 		WHERE nombreusuario = _nombreusuario AND estado = '1';
 END $$
 
-CALL spu_usuarios_login('PATY');
+CALL spu_usuarios_login('JHON');
 
 
 
